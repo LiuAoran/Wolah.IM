@@ -7,11 +7,4 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="Model\" />
-    <Folder Include="Helper\" />
-    <Folder Include="CustomControl\" />
-  </ItemGroup>
-
 </Project>
