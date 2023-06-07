@@ -6,12 +6,33 @@
         xmlns:vm="clr-namespace:Wolah.IM.ViewModel"
         xmlns:local="clr-namespace:Wolah.IM.View"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800">
+        Title="LoginWindow"
+        SnapsToDevicePixels="True"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode ="NoResize" 
+        Height="550" Width="750">
     <Window.DataContext>
         <vm:LoginWindowViewModel />
     </Window.DataContext>
-
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CornerRadius="8" 
+            NonClientFrameEdges="Left,Bottom,Right"
+            UseAeroCaptionButtons="False">
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" x:Name="TitleBarGrid" Height="30">
+            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button></Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*" />
             <RowDefinition Height="*" />
@@ -24,5 +45,5 @@
             <Button x:Name="LoginButton" Content="Login" Command="{Binding SendMsgCommand}"></Button>
             <TextBlock x:Name="ReceiveBox" Text="{Binding UserRec,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
-    </Grid>
+    </Grid>-->
 </Window>
