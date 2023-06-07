@@ -12,12 +12,12 @@
     <Folder Include="Resource\" />
     <Folder Include="ViewModel\" />
     <Folder Include="Model\" />
-    <Folder Include="Helper\" />
     <Folder Include="CustomControl\" />
   </ItemGroup>
 
   <ItemGroup>
     <Compile Remove="Client\**" />
+    <Compile Remove="Helper\Enum.cs" />
   </ItemGroup>
 
   <ItemGroup>

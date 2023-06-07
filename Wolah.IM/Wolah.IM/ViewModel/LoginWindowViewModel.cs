@@ -20,22 +20,29 @@ namespace Wolah.IM.ViewModel
     public class LoginWindowViewModel:INotifyPropertyChanged
     {
         private TCPClient tcpClient = new TCPClient(ServerSource.ServerIP, ServerSource.ServerPort);
-        public string? UserName { get; set; }
-        public string? UserPassword { get; set; }
-        
-        private string? _userSend;
+        private string? _userName;
+        private string? _userPassword;
         private string? _userRec;
 
-        public string? UserSend
+        public string? UserName
         {
-            get => _userSend;
+            get => _userName;
             set
             {
-                _userSend = value;
+                _userName = value;
                 OnPropertyChanged();
             }
         }
 
+        public string? UserPassword
+        {
+            get => _userPassword;
+            set
+            {
+                _userPassword = value;
+                OnPropertyChanged();
+            }
+        }
         public string? UserRec
         {
             get => _userRec;
@@ -51,22 +58,14 @@ namespace Wolah.IM.ViewModel
         public LoginWindowViewModel()
         {
             SendMsgCommand = new RelayCommand(SendMsg);
-            tcpClient.DataReceived -= TcpClient_DataReceived;
-            tcpClient.DataReceived += TcpClient_DataReceived;
-            tcpClient.RecEndEvent -= TcpClientRecEndEvent;
-            tcpClient.RecEndEvent += TcpClientRecEndEvent;
-            
+            tcpClient.CallLoginWindow -= TcpClientCallLoginWindow;
+            tcpClient.CallLoginWindow += TcpClientCallLoginWindow;
             Task.Run(async () =>
             {
                 await tcpClient.StartReceivingAsync();
             });
         }
-        
-        private void TcpClientRecEndEvent(object? sender, string e)
-        {
-            UserRec = e;
-        }
-        private void TcpClient_DataReceived(object? sender, JObject e)
+        private void TcpClientCallLoginWindow(object? sender, JObject e)
         {
             // Handle the data received from the server
             Console.WriteLine($"Received data: {e}");
@@ -92,9 +91,9 @@ namespace Wolah.IM.ViewModel
         {
             // Send a chat message to the server
             JObject chat = new JObject();
-            chat["cmd"] = (int)commands.cmd_login;
-            chat["account"] = UserSend;
-            chat["password"] = UserSend;
+            chat["cmd"] = Commands.CmdLogin.ToInt();
+            chat["account"] = UserName;
+            chat["password"] = UserPassword;
             if(tcpClient.IsConnected())
                 tcpClient.SendDataAsync(chat);
         }

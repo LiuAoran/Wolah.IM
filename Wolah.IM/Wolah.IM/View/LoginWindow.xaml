@@ -17,8 +17,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel>
-            <TextBox x:Name="InputBox" Text="{Binding UserSend,UpdateSourceTrigger=PropertyChanged}"></TextBox>
-            <TextBlock x:Name="TextBlock"  Text="{Binding UserSend,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            <TextBox x:Name="InputAccountBox" Text="{Binding UserName,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <TextBox x:Name="InputPasswordBox"  Text="{Binding UserPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
         </StackPanel>
         <StackPanel Grid.Row="1"> 
             <Button x:Name="LoginButton" Content="Login" Command="{Binding SendMsgCommand}"></Button>

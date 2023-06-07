@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Wolah.IM.Helper;
 using Wolah.IM.ViewModel;
 
 namespace Wolah.IM.Network
@@ -20,8 +21,7 @@ namespace Wolah.IM.Network
         private NetworkStream stream;
 
         // The event handler for data received event
-        public event EventHandler<JObject> DataReceived;
-        public event EventHandler<string> RecEndEvent; 
+        public event EventHandler<JObject> CallLoginWindow;
 
         // The constructor that takes a host name and a port number
         public TCPClient(string host, int port)
@@ -54,59 +54,69 @@ namespace Wolah.IM.Network
 
         // A method that starts receiving data asynchronously
         public async Task StartReceivingAsync()
-{
-    // Create a buffer to store the received data
-    byte[] buffer = new byte[0];
-
-    // Read data from the network stream asynchronously in a while loop
-    while (true)
-    {
-        // Create a temporary buffer to store the data read in each iteration
-        byte[] tempBuffer = new byte[1_024];
-
-        // Store the number of bytes read in each iteration
-        int bytesRead = await stream.ReadAsync(tempBuffer, 0, tempBuffer.Length);
-
-        // If no bytes were read, it means the connection was closed by the remote host
-        if (bytesRead == 0)
         {
-            RecEndEvent?.Invoke(this, buffer.ToString());
-            StopReceiving();
-            return;
-        }
+            // Create a buffer to store the received data
+            byte[] buffer = new byte[0];
 
-        // Append the data read to the buffer
-        buffer = buffer.Concat(tempBuffer.Take(bytesRead)).ToArray();
-
-        // Check if the buffer contains at least 4 bytes of message length
-        while (buffer.Length >= 4)
-        {
-            // Get the message length from the first 4 bytes of the buffer
-            int len = BitConverter.ToInt32(buffer, 0);
-
-            // Check if the buffer contains a complete message
-            if (buffer.Length >= len + 4)
+            // Read data from the network stream asynchronously in a while loop
+            while (true)
             {
-                // Extract the valid data (excluding the length prefix)
-                byte[] data = buffer.Skip(4).Take(len).ToArray();
+                // Create a temporary buffer to store the data read in each iteration
+                byte[] tempBuffer = new byte[1_024];
 
-                // Remove the processed data from the buffer
-                buffer = buffer.Skip(len + 4).ToArray();
+                // Store the number of bytes read in each iteration
+                int bytesRead = await stream.ReadAsync(tempBuffer, 0, tempBuffer.Length);
 
-                // Convert the data to a string using UTF8 encoding
-                string msg = Encoding.UTF8.GetString(data);
+                // If no bytes were read, it means the connection was closed by the remote host
+                if (bytesRead == 0)
+                {
+                    StopReceiving();
+                    return;
+                }
 
-                // Parse the string to a JObject using JSON.NET library and check if it is valid
-                JObject j = JObject.Parse(msg);
-                DataReceived?.Invoke(this, j);
-            }
-            else
-            {
-                break; // If the buffer does not contain a complete message, wait for more data to arrive
+                // Append the data read to the buffer
+                buffer = buffer.Concat(tempBuffer.Take(bytesRead)).ToArray();
+
+                // Check if the buffer contains at least 4 bytes of message length
+                while (buffer.Length >= 4)
+                {
+                    // Get the message length from the first 4 bytes of the buffer
+                    int len = BitConverter.ToInt32(buffer, 0);
+
+                    // Check if the buffer contains a complete message
+                    if (buffer.Length >= len + 4)
+                    {
+                        // Extract the valid data (excluding the length prefix)
+                        byte[] data = buffer.Skip(4).Take(len).ToArray();
+
+                        // Remove the processed data from the buffer
+                        buffer = buffer.Skip(len + 4).ToArray();
+
+                        // Convert the data to a string using UTF8 encoding
+                        string msg = Encoding.UTF8.GetString(data);
+
+                        // Parse the string to a JObject using JSON.NET library and check if it is valid
+                        try
+                        {
+                            JObject j = JObject.Parse(msg);
+                            Int32.TryParse(j["cmd"].ToString(), out int cmd);
+                            if (cmd == Commands.CmdLogin.ToInt() || cmd == Commands.CmdRegister.ToInt())
+                            {
+                                CallLoginWindow?.Invoke(this, j);
+                            }
+                        }
+                        catch (ArgumentException)
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        break; // If the buffer does not contain a complete message, wait for more data to arrive
+                    }
+                }
             }
         }
-    }
-}
 
 
         // A method that stops receiving data and closes the connection
