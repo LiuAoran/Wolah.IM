@@ -7,4 +7,34 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Assert\" />
+    <Folder Include="Resource\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="Model\" />
+    <Folder Include="Helper\" />
+    <Folder Include="CustomControl\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Client\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Client\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Client\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Client\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
+    <PackageReference Include="Newtonsoft.Json.Ninject" Version="1.0.0-beta1" />
+  </ItemGroup>
+
 </Project>
