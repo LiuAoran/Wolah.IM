@@ -35,6 +35,9 @@
                     <DoubleAnimation To="1" Duration="0:0:2"
                                      Storyboard.TargetName="CoverContentGrid"
                                      Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+                    <ColorAnimation To="#E6BE8A" Duration="0:0:1" BeginTime="0:0:2"
+                                    Storyboard.TargetName="IMTextBlock"
+                                    Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"></ColorAnimation>
                 </Storyboard>
             </BeginStoryboard>
         </EventTrigger>
@@ -47,12 +50,15 @@
                     <GradientStop Color="#88d3ce" Offset="1.0" />
                 </LinearGradientBrush>
             </Border.Background>
-            <Grid Name="CoverContentGrid" Height="150" Width="300" Opacity="0">
+            <Grid Name="CoverContentGrid" Height="120" Width="300" Opacity="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="70"></RowDefinition>
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Wolah.IM" FontWeight="Bold" Foreground="#EFEFEF" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Wolah." FontWeight="Bold" Foreground="#EFEFEF" FontSize="30" ></TextBlock>
+                    <TextBlock x:Name="IMTextBlock" Text="IM" FontWeight="Bold" Foreground="#EFEFEF" FontSize="30"></TextBlock>
+                </StackPanel>
                 <TextBlock Text="{Binding CoverText, Mode=OneWay}" Grid.Row="1" FontWeight="Bold" Foreground="#EFEFEF" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
             </Grid>
         </Border>
@@ -67,18 +73,21 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" x:Name="TitleBarGrid" Height="30">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Rectangle Width="1" Fill="#2A000000" Margin="0,4,0,4"></Rectangle>
                         <Button Name="CloseWindowBtn" Style="{StaticResource TitleBarButtonStyle}" Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                            <Path Width="36" Height="32"
-                      Data="M 12,15 23,15"
-                      Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                      StrokeThickness="1" />
-                        </Button>
-                        <Button Name="HideWindowBtn" Style="{StaticResource TitleBarCloseButtonStyle}" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                            <Path Width="36" Height="32"
-                          Data="M 13,11 22,20 M 13,20 22,11"
+                            <Path Width="36" Height="32" 
+                                  Data="M 12,15 23,15"
                           Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
                           StrokeThickness="1" />
                         </Button>
+                        <Button Name="HideWindowBtn" Style="{StaticResource TitleBarCloseButtonStyle}" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Path Width="36" Height="32" 
+                                  Data="M 13,11 22,20 M 13,20 22,11" 
+                      Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                      StrokeThickness="1" />
+                        </Button>
+
+
                     </StackPanel>
                 </Grid>
                 <Border x:Name="WorkSpaceBorder" Grid.Row="1"></Border>

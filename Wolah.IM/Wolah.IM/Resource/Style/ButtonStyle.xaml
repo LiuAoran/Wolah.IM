@@ -7,7 +7,7 @@
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Width" Value="36" />
+        <Setter Property="Width" Value="42" />
         <Setter Property="Height" Value="30" />
         <Setter Property="Template">
             <Setter.Value>
@@ -47,7 +47,7 @@
                                 Background="Transparent"
                                 BorderThickness="0"
                                 SnapsToDevicePixels="True"
-                            CornerRadius="0,0,5,0">
+                            CornerRadius="0,5,0,0">
                         <ContentPresenter x:Name="contentPresenter"
                                 Margin="0"
                                 HorizontalAlignment="Center"
