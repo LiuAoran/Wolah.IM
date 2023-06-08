@@ -46,7 +46,8 @@
                     <Border x:Name="border"
                                 Background="Transparent"
                                 BorderThickness="0"
-                                SnapsToDevicePixels="True">
+                                SnapsToDevicePixels="True"
+                            CornerRadius="0,0,5,0">
                         <ContentPresenter x:Name="contentPresenter"
                                 Margin="0"
                                 HorizontalAlignment="Center"
