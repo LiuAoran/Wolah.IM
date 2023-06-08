@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Mvvm.Input;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,25 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Wolah.IM.CustomControl;
-using Wolah.IM.ViewModel;
 
-namespace Wolah.IM.View
+namespace Wolah.IM.CustomControl
 {
     /// <summary>
-    /// LoginWindow.xaml 的交互逻辑
+    /// RegisterControl.xaml 的交互逻辑
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class RegisterControl : UserControl
     {
-        public LoginWindow()
+        public RegisterControl()
         {
             InitializeComponent();
-        }
-
-        private void LoginGd_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
         }
     }
 }
