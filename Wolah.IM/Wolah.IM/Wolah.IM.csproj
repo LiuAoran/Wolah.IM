@@ -10,7 +10,6 @@
   <ItemGroup>
     <Folder Include="ViewModel\" />
     <Folder Include="Model\" />
-    <Folder Include="CustomControl\" />
     <Folder Include="Converter\" />
   </ItemGroup>
 

@@ -7,20 +7,17 @@
         xmlns:local="clr-namespace:Wolah.IM.View"
         mc:Ignorable="d"
         Title="LoginWindow"
-        SnapsToDevicePixels="True"
         WindowStartupLocation="CenterScreen"
         ResizeMode ="NoResize" 
-        Height="550" Width="750">
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStyle="None"
+        SizeToContent="WidthAndHeight"
+         FontFamily="Microsoft YaHei" 
+        Height="450" Width="750">
     <Window.DataContext>
         <vm:LoginWindowViewModel />
     </Window.DataContext>
-    <WindowChrome.WindowChrome>
-        <WindowChrome
-            CornerRadius="8" 
-            NonClientFrameEdges="Left,Bottom,Right"
-            UseAeroCaptionButtons="False">
-        </WindowChrome>
-    </WindowChrome.WindowChrome>
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -28,27 +25,65 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid Grid.Row="0" x:Name="TitleBarGrid" Height="30">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="CloseWindowBtn" Style="{StaticResource TitleBarButtonStyle}" Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                    <Path Width="36" Height="32"
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Window.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation To="0" Duration="0:0:0.8"
+                                     Storyboard.TargetName="LoginBdTransform"
+                                     Storyboard.TargetProperty="X"/>
+                    <DoubleAnimation To="1" Duration="0:0:2"
+                                     Storyboard.TargetName="CoverContentGrid"
+                                     Storyboard.TargetProperty="Opacity"></DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
+    <Grid Name="LoginGd"  Margin="5"  Width="750" MouseLeftButtonDown="LoginGd_MouseLeftButtonDown">
+        <Border x:Name="CoverBd" HorizontalAlignment="Left" Width="400" Panel.ZIndex="1" CornerRadius="5">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#6e45e2" Offset="0.0" />
+                    <GradientStop Color="#88d3ce" Offset="1.0" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Name="CoverContentGrid" Height="150" Width="300" Opacity="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Wolah.IM" FontWeight="Bold" Foreground="#EFEFEF" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="{Binding CoverText, Mode=OneWay}" Grid.Row="1" FontWeight="Bold" Foreground="#EFEFEF" FontSize="10" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+            </Grid>
+        </Border>
+        <Border x:Name="LoginBd" Background="#F7F9FA" HorizontalAlignment="Right" Width="350"  Height="450" BorderThickness="0" CornerRadius="5" Margin="0,0,10,0">
+            <Border.RenderTransform>
+                <TranslateTransform X="-350" x:Name="LoginBdTransform"/>
+            </Border.RenderTransform>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" x:Name="TitleBarGrid" Height="30">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="CloseWindowBtn" Style="{StaticResource TitleBarButtonStyle}" Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Path Width="36" Height="32"
                       Data="M 12,15 23,15"
                       Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
                       StrokeThickness="1" />
-                </Button>
-                <Button Name="HideWindowBtn" Style="{StaticResource TitleBarCloseButtonStyle}" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                    <Path Width="36" Height="32"
+                        </Button>
+                        <Button Name="HideWindowBtn" Style="{StaticResource TitleBarCloseButtonStyle}" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Path Width="36" Height="32"
                           Data="M 13,11 22,20 M 13,20 22,11"
                           Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
                           StrokeThickness="1" />
-                </Button>
-            </StackPanel>
-        </Grid>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                <Border x:Name="WorkSpaceBorder" Grid.Row="1"></Border>
+            </Grid>
+        </Border>
     </Grid>
     <!--<Grid>
         <Grid.RowDefinitions>

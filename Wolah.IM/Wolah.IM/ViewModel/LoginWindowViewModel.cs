@@ -15,12 +15,14 @@ using Wolah.IM.Helper;
 using Wolah.IM.Model;
 using Wolah.IM.Private;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace Wolah.IM.ViewModel
 {
     public class LoginWindowViewModel:INotifyPropertyChanged
     {
-        private TCPClient tcpClient = new TCPClient(ServerSource.ServerIP, ServerSource.ServerPort);
+        //private TCPClient tcpClient = new TCPClient(ServerSource.ServerIP, ServerSource.ServerPort);
+        private TCPClient tcpClient;
 
         private string? _userName;
         public string? UserName
@@ -55,6 +57,17 @@ namespace Wolah.IM.ViewModel
             }
         }
 
+        private string? _coverText;
+        public string? CoverText
+        {
+            get => _coverText;
+            set
+            {
+                _coverText = value;
+                OnPropertyChanged();
+            }
+        }
+
         #region Command Declare
         public ICommand SendMsgCommand { get;  }
         public ICommand CloseWindowCommand { get; }
@@ -69,7 +82,16 @@ namespace Wolah.IM.ViewModel
             HideWindowCommand = new RelayCommand<object>(HideWindow);
             LoginCommand = new RelayCommand(Login);
 
-            InitTcpConnection();
+            InitCurrentTime();
+            //InitTcpConnection();
+        }
+
+        private void InitCurrentTime()
+        {
+            DispatcherTimer showTimer = new DispatcherTimer();
+            showTimer.Tick += (sender, e) => { CoverText = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"); };
+            showTimer.Interval = new TimeSpan(0,0,0,1);
+            showTimer.Start();  
         }
 
         private void InitTcpConnection()
@@ -131,7 +153,7 @@ namespace Wolah.IM.ViewModel
             {
                 JObject msg = new JObject();
                 msg["cmd"] = Commands.CmdLogout.ToInt();
-                SendMsg(msg);
+                //SendMsg(msg);
                 window.Close();
             }
         }
