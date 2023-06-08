@@ -54,10 +54,13 @@ namespace Wolah.IM.ViewModel
         }
 
         public ICommand SendMsgCommand { get;  }
+        public ICommand CloseWindowCommand { get; }
 
         public LoginWindowViewModel()
         {
             SendMsgCommand = new RelayCommand(SendMsg);
+            CloseWindowCommand = new RelayCommand(() => { System.Environment.Exit(0); });
+
             tcpClient.CallLoginWindow -= TcpClientCallLoginWindow;
             tcpClient.CallLoginWindow += TcpClientCallLoginWindow;
             Task.Run(async () =>

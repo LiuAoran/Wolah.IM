@@ -21,6 +21,13 @@
             UseAeroCaptionButtons="False">
         </WindowChrome>
     </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Resource/Style/ButtonStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -28,7 +35,12 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" x:Name="TitleBarGrid" Height="30">
             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button></Button>
+                <Button Name="CloseWindowBtn" Style="{StaticResource TitleBarCloseButtonStyle}" Command="{Binding CloseWindowCommand}">
+                    <Path Width="36" Height="32"
+                      Data="M 13,11 22,20 M 13,20 22,11"
+                      Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                      StrokeThickness="1" />
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>
