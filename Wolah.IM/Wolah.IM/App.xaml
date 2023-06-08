@@ -4,7 +4,11 @@
              xmlns:local="clr-namespace:Wolah.IM"
              StartupUri="View/LoginWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="Asset/Theme/LightThemeMode.xaml"></ResourceDictionary>
-        <ResourceDictionary Source="Asset/Theme/DarkThemeMode.xaml"></ResourceDictionary>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Asset/Theme/LightThemeMode.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="Asset/Theme/DarkThemeMode.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
