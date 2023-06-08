@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using Wolah.IM.Helper;
 using Wolah.IM.Model;
 using Wolah.IM.Private;
+using System.Windows;
 
 namespace Wolah.IM.ViewModel
 {
@@ -59,7 +60,7 @@ namespace Wolah.IM.ViewModel
         public LoginWindowViewModel()
         {
             SendMsgCommand = new RelayCommand(SendMsg);
-            CloseWindowCommand = new RelayCommand(() => { System.Environment.Exit(0); });
+            CloseWindowCommand = new RelayCommand<object>(CloseWindow);
 
             tcpClient.CallLoginWindow -= TcpClientCallLoginWindow;
             tcpClient.CallLoginWindow += TcpClientCallLoginWindow;
@@ -68,6 +69,15 @@ namespace Wolah.IM.ViewModel
                 await tcpClient.StartReceivingAsync();
             });
         }
+
+        private void CloseWindow(object? obj)
+        {
+            if (obj is Window window)
+            {
+                window.Close();
+            }
+        }
+
         private void TcpClientCallLoginWindow(object? sender, JObject e)
         {
             // Handle the data received from the server
