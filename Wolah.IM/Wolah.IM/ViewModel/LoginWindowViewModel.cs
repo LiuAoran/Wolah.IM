@@ -21,10 +21,8 @@ namespace Wolah.IM.ViewModel
     public class LoginWindowViewModel:INotifyPropertyChanged
     {
         private TCPClient tcpClient = new TCPClient(ServerSource.ServerIP, ServerSource.ServerPort);
-        private string? _userName;
-        private string? _userPassword;
-        private string? _userRec;
 
+        private string? _userName;
         public string? UserName
         {
             get => _userName;
@@ -35,6 +33,7 @@ namespace Wolah.IM.ViewModel
             }
         }
 
+        private string? _userPassword;
         public string? UserPassword
         {
             get => _userPassword;
@@ -44,6 +43,8 @@ namespace Wolah.IM.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        private string? _userRec;
         public string? UserRec
         {
             get => _userRec;
@@ -54,28 +55,28 @@ namespace Wolah.IM.ViewModel
             }
         }
 
+        #region Command Declare
         public ICommand SendMsgCommand { get;  }
         public ICommand CloseWindowCommand { get; }
-
+        #endregion
+        
         public LoginWindowViewModel()
         {
             SendMsgCommand = new RelayCommand(SendMsg);
             CloseWindowCommand = new RelayCommand<object>(CloseWindow);
 
+            InitTcpConnection();
+        }
+
+        private void InitTcpConnection()
+        {
             tcpClient.CallLoginWindow -= TcpClientCallLoginWindow;
             tcpClient.CallLoginWindow += TcpClientCallLoginWindow;
+
             Task.Run(async () =>
             {
                 await tcpClient.StartReceivingAsync();
             });
-        }
-
-        private void CloseWindow(object? obj)
-        {
-            if (obj is Window window)
-            {
-                window.Close();
-            }
         }
 
         private void TcpClientCallLoginWindow(object? sender, JObject e)
@@ -84,13 +85,7 @@ namespace Wolah.IM.ViewModel
             Console.WriteLine($"Received data: {e}");
             // Update the UserRec property
             UserRec = e.ToString();
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        } 
 
         protected bool SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
@@ -110,5 +105,23 @@ namespace Wolah.IM.ViewModel
             if(tcpClient.IsConnected())
                 tcpClient.SendDataAsync(chat);
         }
+
+        #region MVVM
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        #endregion
+
+        #region Window Action
+        private void CloseWindow(object? obj)
+        {
+            if (obj is Window window)
+            {
+                window.Close();
+            }
+        }
+        #endregion
     }
 }
