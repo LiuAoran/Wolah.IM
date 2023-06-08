@@ -34,12 +34,18 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" x:Name="TitleBarGrid" Height="30">
-            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Name="CloseWindowBtn" Style="{StaticResource TitleBarCloseButtonStyle}" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Name="CloseWindowBtn" Style="{StaticResource TitleBarButtonStyle}" Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                     <Path Width="36" Height="32"
-                      Data="M 13,11 22,20 M 13,20 22,11"
+                      Data="M 12,15 23,15"
                       Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
                       StrokeThickness="1" />
+                </Button>
+                <Button Name="HideWindowBtn" Style="{StaticResource TitleBarCloseButtonStyle}" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                    <Path Width="36" Height="32"
+                          Data="M 13,11 22,20 M 13,20 22,11"
+                          Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                          StrokeThickness="1" />
                 </Button>
             </StackPanel>
         </Grid>
