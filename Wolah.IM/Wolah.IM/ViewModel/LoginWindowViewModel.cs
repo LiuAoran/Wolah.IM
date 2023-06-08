@@ -58,12 +58,14 @@ namespace Wolah.IM.ViewModel
         #region Command Declare
         public ICommand SendMsgCommand { get;  }
         public ICommand CloseWindowCommand { get; }
+        public ICommand HideWindowCommand { get; }
         #endregion
         
         public LoginWindowViewModel()
         {
             SendMsgCommand = new RelayCommand(SendMsg);
             CloseWindowCommand = new RelayCommand<object>(CloseWindow);
+            HideWindowCommand = new RelayCommand<object>(HideWindow);
 
             InitTcpConnection();
         }
@@ -120,6 +122,14 @@ namespace Wolah.IM.ViewModel
             if (obj is Window window)
             {
                 window.Close();
+            }
+        }
+        
+        private void HideWindow(object? obj)
+        {
+            if (obj is Window window)
+            {
+                window.WindowState = WindowState.Minimized;
             }
         }
         #endregion
