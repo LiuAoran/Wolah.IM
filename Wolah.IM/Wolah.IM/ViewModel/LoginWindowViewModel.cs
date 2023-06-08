@@ -59,13 +59,15 @@ namespace Wolah.IM.ViewModel
         public ICommand SendMsgCommand { get;  }
         public ICommand CloseWindowCommand { get; }
         public ICommand HideWindowCommand { get; }
+        public ICommand LoginCommand { get; }
         #endregion
         
         public LoginWindowViewModel()
         {
-            SendMsgCommand = new RelayCommand(SendMsg);
+            SendMsgCommand = new RelayCommand<JObject>(SendMsg!);
             CloseWindowCommand = new RelayCommand<object>(CloseWindow);
             HideWindowCommand = new RelayCommand<object>(HideWindow);
+            LoginCommand = new RelayCommand(Login);
 
             InitTcpConnection();
         }
@@ -97,7 +99,7 @@ namespace Wolah.IM.ViewModel
             return true;
         }
 
-        public void SendMsg()
+        public void Login()
         {
             // Send a chat message to the server
             JObject chat = new JObject();
@@ -106,6 +108,12 @@ namespace Wolah.IM.ViewModel
             chat["password"] = UserPassword;
             if(tcpClient.IsConnected())
                 tcpClient.SendDataAsync(chat);
+        }
+
+        private void SendMsg(JObject j)
+        {
+            if (tcpClient.IsConnected())
+                tcpClient.SendDataAsync(j);
         }
 
         #region MVVM
@@ -121,6 +129,9 @@ namespace Wolah.IM.ViewModel
         {
             if (obj is Window window)
             {
+                JObject msg = new JObject();
+                msg["cmd"] = Commands.CmdLogout.ToInt();
+                SendMsg(msg);
                 window.Close();
             }
         }
