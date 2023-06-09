@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="TextBox" x:Key="UserNameTextBoxStyle">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    Background="{TemplateBinding Background}" 
+                                    SnapsToDevicePixels="True"
+                                    CornerRadius="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderBrush="#DDD" BorderThickness="0,0,1,0" Margin="0,8,5,8"/>
+                                <TextBlock Text="请输入用户名" Grid.Column="1" VerticalAlignment="Center" Foreground="#BBB"
+                                           Name="markText" Visibility="Collapsed" FontSize="12" Margin="2,0"/>
+                                <TextBlock Text="&#xe610;"
+                                           FontFamily="{DynamicResource iconfont}" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                           Foreground="#DDD"/>
+                                
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
+                                                  HorizontalScrollBarVisibility="Hidden" 
+                                                  VerticalScrollBarVisibility="Hidden"
+                                                  Grid.Column="1"
+                                                  VerticalAlignment="Center" MinHeight="20"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Path=Text,RelativeSource={RelativeSource Mode=Self}}" Value="">
+                                <Setter Property="Visibility" TargetName="markText" Value="Visible"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    
+    <Style TargetType="PasswordBox" x:Key="PasswordBoxStyle">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    Background="{TemplateBinding Background}" 
+                                    SnapsToDevicePixels="True"
+                                    CornerRadius="5">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border BorderBrush="#DDD" BorderThickness="0,0,1,0" Margin="0,8,5,8"/>
+                                <TextBlock Text="请输入密码" Grid.Column="1" VerticalAlignment="Center" Foreground="#BBB"
+                                           Name="markText" Visibility="Collapsed" FontSize="12" Margin="2,0"/>
+                                <TextBlock Grid.Column="0" Text="&#xe602;" FontSize="14" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                               Foreground="#DDD"/>
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
+                                                  HorizontalScrollBarVisibility="Hidden" 
+                                                  VerticalScrollBarVisibility="Hidden"
+                                                  Grid.Column="1"
+                                                  VerticalAlignment="Center" MinHeight="20"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF7EB4EA"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF569DE5"/>
+                            </Trigger>
+                            <DataTrigger Binding="{Binding Path=UserModel.Password}" Value="">
+                                <Setter Property="Visibility" TargetName="markText" Value="Visible"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+</ResourceDictionary>
