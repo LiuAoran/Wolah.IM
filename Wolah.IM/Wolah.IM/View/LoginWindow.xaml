@@ -1,9 +1,10 @@
-﻿<Window x:Class="Wolah.IM.View.LoginWindow"
+<Window x:Class="Wolah.IM.View.LoginWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Wolah.IM.ViewModel"
+        xmlns:a="clr-namespace:Wolah.IM.CustomControl"
         xmlns:local="clr-namespace:Wolah.IM.View"
         mc:Ignorable="d"
         Title="LoginWindow"
@@ -91,6 +92,10 @@
                     </StackPanel>
                 </Grid>
                 <Border x:Name="WorkSpaceBorder" Grid.Row="1"></Border>
+                <Grid Grid.Row="1">
+                    <a:LoginControl>
+                        </a:LoginControl>
+                </Grid>
             </Grid>
         </Border>
     </Grid>
