@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Wolah.IM.CustomControl
+namespace Wolah.IM.View.LoginView
 {
     /// <summary>
-    /// SampleControl.xaml 的交互逻辑
+    /// Interaction logic for LoginControl.xaml
     /// </summary>
-    public partial class SampleControl : UserControl
+    public partial class LoginControl : UserControl
     {
-        public SampleControl()
+        public LoginControl()
         {
             InitializeComponent();
         }

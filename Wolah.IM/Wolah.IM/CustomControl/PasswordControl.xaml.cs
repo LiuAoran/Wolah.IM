@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Wolah.IM.CustomControl
 {
     /// <summary>
-    /// RegisterControl.xaml 的交互逻辑
+    /// Interaction logic for PasswordControl.xaml
     /// </summary>
-    public partial class RegisterControl : UserControl
+    public partial class PasswordControl : UserControl
     {
-        public RegisterControl()
+        public PasswordControl()
         {
             InitializeComponent();
         }

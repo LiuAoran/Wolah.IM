@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Wolah.IM.CustomControl
 {
     /// <summary>
-    /// LoginControl.xaml 的交互逻辑
+    /// Interaction logic for AccountControl.xaml
     /// </summary>
-    public partial class LoginControl : UserControl
+    public partial class AccountControl : UserControl
     {
-        public LoginControl()
+        public AccountControl()
         {
             InitializeComponent();
         }
