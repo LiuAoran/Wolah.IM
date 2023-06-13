@@ -93,8 +93,7 @@
                 </Grid>
                 <Border x:Name="WorkSpaceBorder" Grid.Row="1"></Border>
                 <Grid Grid.Row="1">
-                    <lv:LoginControl>
-                        </lv:LoginControl>
+                    <Border x:Name="LonginContentBorder"></Border> 
                 </Grid>
             </Grid>
         </Border>

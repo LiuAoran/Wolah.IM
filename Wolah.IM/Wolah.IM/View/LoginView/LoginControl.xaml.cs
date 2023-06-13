@@ -20,9 +20,15 @@ namespace Wolah.IM.View.LoginView
     /// </summary>
     public partial class LoginControl : UserControl
     {
+        public event EventHandler GoRegisterEvent;
         public LoginControl()
         {
             InitializeComponent();
+        }
+
+        private void GoRegisterBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            GoRegisterEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }
