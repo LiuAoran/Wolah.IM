@@ -20,6 +20,14 @@ namespace Wolah.IM.CustomControl
     /// </summary>
     public partial class AccountControl : UserControl
     {
+        public static readonly DependencyProperty WatermarkProperty = 
+            DependencyProperty.Register("Watermark", typeof(string), typeof(AccountControl), new PropertyMetadata(null));
+        public string Watermark
+        {
+            get { return (string)GetValue(WatermarkProperty); }
+            set { SetValue(WatermarkProperty, value); }
+        }
+
         public AccountControl()
         {
             InitializeComponent();

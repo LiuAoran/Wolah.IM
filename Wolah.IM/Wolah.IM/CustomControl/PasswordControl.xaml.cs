@@ -20,6 +20,22 @@ namespace Wolah.IM.CustomControl
     /// </summary>
     public partial class PasswordControl : UserControl
     {
+        public static readonly DependencyProperty WatermarkProperty =
+    DependencyProperty.Register("Watermark", typeof(string), typeof(PasswordControl), new PropertyMetadata(null));
+        public string Watermark
+        {
+            get { return (string)GetValue(WatermarkProperty); }
+            set { SetValue(WatermarkProperty, value); }
+        }
+
+        public static readonly DependencyProperty PasswordProperty =
+DependencyProperty.Register("Password", typeof(string), typeof(PasswordControl), new PropertyMetadata(null));
+        public string Password
+        {
+            get { return (string)GetValue(PasswordProperty); }
+            set { SetValue(PasswordProperty, value); }
+        }
+
         public PasswordControl()
         {
             InitializeComponent();

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Wolah.IM.CustomControl"
+             xmlns:converter="clr-namespace:Wolah.IM.Converter"
              mc:Ignorable="d" 
               d:DesignHeight="36" d:DesignWidth="240">
     <UserControl.Resources>
@@ -11,9 +12,11 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resource/Style/TextBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
+            <converter:StringToVisibilityConverter x:Key="StringToVisibilityConverter"></converter:StringToVisibilityConverter>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <TextBox Style="{StaticResource AccountTextBoxStyle}"></TextBox>
+        <TextBox x:Name="TextBox" Style="{StaticResource AccountTextBoxStyle}"></TextBox>
+        <TextBlock IsHitTestVisible="False" Text="{Binding Watermark, RelativeSource={RelativeSource AncestorType=UserControl}}"  Visibility="{Binding ElementName=TextBox, Path=Text, Converter={StaticResource StringToVisibilityConverter}}" VerticalAlignment="Center" FontSize="14" Margin="20,0,0,0" Foreground="#BBB"></TextBlock>
     </Grid>
 </UserControl>
