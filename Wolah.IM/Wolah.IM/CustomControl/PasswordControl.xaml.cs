@@ -58,10 +58,5 @@ DependencyProperty.Register("PasswordText", typeof(string), typeof(PasswordContr
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        private void UserControl_LostFocus(object sender, RoutedEventArgs e)
-        {
-            DisplayPasswordChk.IsChecked = false;
-        }
     }
 }

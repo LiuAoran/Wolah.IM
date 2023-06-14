@@ -23,6 +23,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Resource/Style/ButtonStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="../Resource/Style/CheckBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -74,6 +75,13 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" x:Name="TitleBarGrid" Height="30">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Name="ServerSettingsBtn" Style="{StaticResource TitleBarButtonStyle}" Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                            <Path Width="32" Height="32" 
+                                   Data="M 13,11 22,20 M 13,20 22,11" 
+                          Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                          StrokeThickness="1" />
+                        </Button>
+                        <CheckBox Style="{StaticResource ThemeModeBoxStyle}" Height="32"></CheckBox>
                         <Rectangle Width="1" Fill="#2A000000" Margin="0,4,0,4"></Rectangle>
                         <Button Name="CloseWindowBtn" Style="{StaticResource TitleBarButtonStyle}" Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                             <Path Width="36" Height="32" 
