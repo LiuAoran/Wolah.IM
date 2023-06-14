@@ -24,34 +24,74 @@ namespace Wolah.IM.Network
         public event EventHandler<JObject> CallLoginWindow;
 
         // The constructor that takes a host name and a port number
-        public TCPClient(string host, int port)
+        public TCPClient(string host, int port, int delay = 3000)
         {
-            // Create a new TcpClient object and connect to the host and port
+            // Create a new TcpClient object
             client = new TcpClient();
-            client.Connect(host, port);
-
+            //Try to connect to the server asynchronously
+            try
+            {
+                var connectTask = client.ConnectAsync(host, port);
+                // Wait for the connection to complete, with a timeout of 3 seconds
+                if (!connectTask.Wait(delay))
+                {
+                    // Connection timed out
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+            //check if the connection is established
+            if (!client.Connected)
+            {
+                return;
+            }
             // Get the network stream from the TcpClient object
             stream = client.GetStream();
         }
         
-        public TCPClient(IPAddress host, int port)
+        public TCPClient(IPAddress host, int port) : this(host.ToString(), port)
         {
-            // Create a new TcpClient object and connect to the host and port
+        }
+
+        public TCPClient()
+        {
             client = new TcpClient();
-            client.Connect(host, port);
+        }
+        
+        public async Task ConnectAsync(string host, int port, int delay = 3000)
+        {
+            //Try to connect to the server asynchronously
+            try
+            {
+                var connectTask =  client.ConnectAsync(host, port);
+                // Wait for the connection to complete, with a timeout of 3 seconds
+                if (await Task.WhenAny(connectTask, Task.Delay(delay)) != connectTask)
+                {
+                    // Connection timed out
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Failed to connect.");
+            }
             //check if the connection is established
             if (!client.Connected)
             {
-                Console.WriteLine("Connection failed");
-            }
-            else
-            {
-                Console.WriteLine("Connection established");
+                throw new Exception("Failed to connect.");
             }
             // Get the network stream from the TcpClient object
             stream = client.GetStream();
         }
 
+        public async Task ConnectAsync(IPAddress host, int port)
+        {
+            await ConnectAsync(host.ToString(), port);
+        }
+        
         // A method that starts receiving data asynchronously
         public async Task StartReceivingAsync()
         {
@@ -152,6 +192,21 @@ namespace Wolah.IM.Network
         public bool IsConnected()
         {
             return client.Connected;
+        }
+        
+        public static async Task<bool> TestServerAsync(string ip, int port, int delay = 3000)
+        {
+            var tcpClient = new TCPClient();
+            await tcpClient.ConnectAsync(ip, port,delay);
+            if (tcpClient.IsConnected())
+            {
+                tcpClient.StopReceiving();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
