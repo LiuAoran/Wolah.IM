@@ -154,8 +154,88 @@ namespace Wolah.IM.View
                 registerControl.BeginAnimation(OpacityProperty, registerControlOpacityAnimation);
             };
             loginControl.BeginAnimation(MarginProperty, loginControlAnimation);
-            loginControl.BeginAnimation(OpacityProperty, loginControlOpacityAnimation);
+            loginControl.BeginAnimation(OpacityProperty, loginControlOpacityAnimation); 
             
+        }
+        //Ip Setting
+        private void ServerSettingsBtn_OnClick(object sender, RoutedEventArgs e)
+        {
+            ServerSettingControl.CancelServerSettingEvent += ServerSettingControlOnCancelEvent;
+            ServerSettingControl.ConfirmServerSettingEvent += ServerSettingControlOnConfirmEvent;
+            ShowServerSetting();
+        }
+        
+        private void ServerSettingControlOnCancelEvent(object? sender, EventArgs e)
+        {
+            ServerSettingControl.CancelServerSettingEvent -= ServerSettingControlOnCancelEvent;
+            HideServerSetting();
+        }
+        
+        private void ServerSettingControlOnConfirmEvent(object? sender, EventArgs e)
+        {
+            //TODO:Save Server Setting
+            ServerSettingControl.ConfirmServerSettingEvent -= ServerSettingControlOnConfirmEvent;
+            HideServerSetting();
+        }
+        
+        private void ShowServerSetting()
+        {
+            if(ServerSettingBorder.Visibility == Visibility.Visible)return;
+            var serverSettingBorderAnimation = new ThicknessAnimation
+            {
+                From = new Thickness(0, 0, 0, Height),
+                To = new Thickness(0, 0, 0, 0),
+                Duration = TimeSpan.FromSeconds(0.5),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+            var serverSettingBorderOpacityAnimation = new DoubleAnimation
+            {
+                From = 0.0,
+                To = 1.0,
+                Duration = TimeSpan.FromSeconds(0.5)
+            };
+            var loginContentBorderOpacityAnimation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = TimeSpan.FromSeconds(0.3)
+            };
+            loginContentBorderOpacityAnimation.Completed += (s, e) =>
+            {
+                ServerSettingBorder.Visibility = Visibility.Visible;
+                ServerSettingBorder.BeginAnimation(MarginProperty, serverSettingBorderAnimation);
+                ServerSettingBorder.BeginAnimation(OpacityProperty, serverSettingBorderOpacityAnimation);
+            };
+            LonginContentBorder.BeginAnimation(OpacityProperty, loginContentBorderOpacityAnimation);
+        }
+        private void HideServerSetting()
+        {
+            var serverSettingBorderAnimation = new ThicknessAnimation
+            {
+                From = new Thickness(0, 0, 0, 0),
+                To = new Thickness(0, 0, 0, Height),
+                Duration = TimeSpan.FromSeconds(0.5),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+            var serverSettingBorderOpacityAnimation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = TimeSpan.FromSeconds(0.3)
+            };
+            var loginContentBorderOpacityAnimation = new DoubleAnimation
+            {
+                From = 0.0,
+                To = 1.0,
+                Duration = TimeSpan.FromSeconds(0.5)
+            };
+            serverSettingBorderOpacityAnimation.Completed += (s, e) =>
+            {
+                ServerSettingBorder.Visibility = Visibility.Collapsed;
+                LonginContentBorder.BeginAnimation(OpacityProperty, loginContentBorderOpacityAnimation);
+            };
+            ServerSettingBorder.BeginAnimation(MarginProperty, serverSettingBorderAnimation);
+            ServerSettingBorder.BeginAnimation(OpacityProperty, serverSettingBorderOpacityAnimation);
         }
     }
 }
