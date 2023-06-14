@@ -80,8 +80,8 @@ namespace Wolah.IM.View
             var registerControlAnimation = new ThicknessAnimation
             {
                 From = new Thickness(0, 0, 0, 0),
-                To = new Thickness(Width * 0.5, 0, 0, 0),
-                Duration = TimeSpan.FromSeconds(0.3),
+                To = new Thickness(Width * 0.4, 0, 0, 0),
+                Duration = TimeSpan.FromSeconds(0.5),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
@@ -89,13 +89,13 @@ namespace Wolah.IM.View
             {
                 From = new Thickness(-Width, 0, 0, 0),
                 To = new Thickness(0, 0, 0, 0),
-                Duration = TimeSpan.FromSeconds(0.3),
+                Duration = TimeSpan.FromSeconds(0.5),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
             
             var registerControlOpacityAnimation = new DoubleAnimation
             {
-                From = 1.0,
+                From = 0.9,
                 To = 0.0,
                 Duration = TimeSpan.FromSeconds(0.3)
             };
@@ -104,10 +104,10 @@ namespace Wolah.IM.View
             {
                 From = 0.0,
                 To = 1.0,
-                Duration = TimeSpan.FromSeconds(0.3)
+                Duration = TimeSpan.FromSeconds(0.5)
             };
 
-            registerControlAnimation.Completed += (s, e) =>
+            registerControlOpacityAnimation.Completed += (s, e) =>
             {
                 LonginContentBorder.Child = loginControl;
                 loginControl.BeginAnimation(MarginProperty, loginControlAnimation);
@@ -121,16 +121,16 @@ namespace Wolah.IM.View
             var loginControlAnimation = new ThicknessAnimation
             {
                 From = new Thickness(0, 0, 0, 0),
-                To = new Thickness(-Width * 0.5, 0, 0, 0),
-                Duration = TimeSpan.FromSeconds(0.3),
+                To = new Thickness(-Width * 0.4, 0, 0, 0),
+                Duration = TimeSpan.FromSeconds(0.5),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
             
             var registerControlAnimation = new ThicknessAnimation
             {
-                From = new Thickness(Width * 0.5, 0, 0, 0),
+                From = new Thickness(Width, 0, 0, 0),
                 To = new Thickness(0, 0, 0, 0),
-                Duration = TimeSpan.FromSeconds(0.3),
+                Duration = TimeSpan.FromSeconds(0.5),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
             
@@ -145,9 +145,9 @@ namespace Wolah.IM.View
             {
                 From = 0.0,
                 To = 1.0,
-                Duration = TimeSpan.FromSeconds(0.3)
+                Duration = TimeSpan.FromSeconds(0.5)
             };
-            loginControlAnimation.Completed += (s, e) =>
+            loginControlOpacityAnimation.Completed += (s, e) =>
             {
                 LonginContentBorder.Child = registerControl;
                 registerControl.BeginAnimation(MarginProperty, registerControlAnimation);
