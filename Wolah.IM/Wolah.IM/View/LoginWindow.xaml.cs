@@ -80,49 +80,81 @@ namespace Wolah.IM.View
             var registerControlAnimation = new ThicknessAnimation
             {
                 From = new Thickness(0, 0, 0, 0),
-                To = new Thickness(Width, 0, -Width, 0),
-                Duration = TimeSpan.FromSeconds(0.5),
+                To = new Thickness(Width * 0.5, 0, 0, 0),
+                Duration = TimeSpan.FromSeconds(0.3),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+
+            var loginControlAnimation = new ThicknessAnimation
+            {
+                From = new Thickness(-Width, 0, 0, 0),
+                To = new Thickness(0, 0, 0, 0),
+                Duration = TimeSpan.FromSeconds(0.3),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
             
-            var loginControlAnimation = new ThicknessAnimation
+            var registerControlOpacityAnimation = new DoubleAnimation
             {
-                From = new Thickness(-Width, 0, Width, 0),
-                To = new Thickness(0, 0, 0, 0),
-                Duration = TimeSpan.FromSeconds(0.5),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+                From = 1.0,
+                To = 0.0,
+                Duration = TimeSpan.FromSeconds(0.3)
             };
+            
+            var loginControlOpacityAnimation = new DoubleAnimation
+            {
+                From = 0.0,
+                To = 1.0,
+                Duration = TimeSpan.FromSeconds(0.3)
+            };
+
             registerControlAnimation.Completed += (s, e) =>
             {
                 LonginContentBorder.Child = loginControl;
                 loginControl.BeginAnimation(MarginProperty, loginControlAnimation);
+                loginControl.BeginAnimation(OpacityProperty, loginControlOpacityAnimation);
             };
             registerControl.BeginAnimation(MarginProperty, registerControlAnimation);
-            
+            registerControl.BeginAnimation(OpacityProperty, registerControlOpacityAnimation);
         }
         private void GoRegisterAnimation()
         {
             var loginControlAnimation = new ThicknessAnimation
             {
                 From = new Thickness(0, 0, 0, 0),
-                To = new Thickness(-Width, 0, Width, 0),
-                Duration = TimeSpan.FromSeconds(0.5),
+                To = new Thickness(-Width * 0.5, 0, 0, 0),
+                Duration = TimeSpan.FromSeconds(0.3),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
             
             var registerControlAnimation = new ThicknessAnimation
             {
-                From = new Thickness(Width, 0, -Width, 0),
+                From = new Thickness(Width * 0.5, 0, 0, 0),
                 To = new Thickness(0, 0, 0, 0),
-                Duration = TimeSpan.FromSeconds(0.5),
+                Duration = TimeSpan.FromSeconds(0.3),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+            
+            var loginControlOpacityAnimation = new DoubleAnimation
+            {
+                From = 1.0,
+                To = 0.0,
+                Duration = TimeSpan.FromSeconds(0.3)
+            };
+            
+            var registerControlOpacityAnimation = new DoubleAnimation
+            {
+                From = 0.0,
+                To = 1.0,
+                Duration = TimeSpan.FromSeconds(0.3)
             };
             loginControlAnimation.Completed += (s, e) =>
             {
                 LonginContentBorder.Child = registerControl;
                 registerControl.BeginAnimation(MarginProperty, registerControlAnimation);
+                registerControl.BeginAnimation(OpacityProperty, registerControlOpacityAnimation);
             };
             loginControl.BeginAnimation(MarginProperty, loginControlAnimation);
+            loginControl.BeginAnimation(OpacityProperty, loginControlOpacityAnimation);
             
         }
     }

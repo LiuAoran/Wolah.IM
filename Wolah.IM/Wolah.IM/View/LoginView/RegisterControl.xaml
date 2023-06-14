@@ -10,17 +10,20 @@
     <Grid Height="400" Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock x:Name="LoginTextBlock" Text="Register" FontSize="40" VerticalAlignment="Center"></TextBlock>
         <StackPanel Grid.Row="1">
+            <TextBlock Text="Name" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
             <cus:AccountControl Height="36" Width="280" Margin="0,10,0,10"></cus:AccountControl>
+            <TextBlock Text="Password" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
             <cus:PasswordControl Height="36" Width="280" Margin="0,10,0,10"></cus:PasswordControl >
+            <TextBlock Text="Confirm Password" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
             <cus:PasswordControl Height="36" Width="280" Margin="0,10,0,10"></cus:PasswordControl>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <Button x:Name="GoLoginBtn" Content="Login" Height="50" Click="GoLoginBtn_OnClick"> </Button>
+            <Button x:Name="GoLoginBtn" Content="Login" Height="50" Click="GoLoginBtn_OnClick" Margin="0,30,0,10"> </Button>
         </StackPanel>
     </Grid>
 </UserControl>
