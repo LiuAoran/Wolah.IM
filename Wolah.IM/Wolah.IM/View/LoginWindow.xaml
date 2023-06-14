@@ -19,14 +19,6 @@
     <Window.DataContext>
         <vm:LoginWindowViewModel />
     </Window.DataContext>
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Resource/Style/ButtonStyle.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="../Resource/Style/CheckBoxStyle.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="Window.Loaded">
             <BeginStoryboard>

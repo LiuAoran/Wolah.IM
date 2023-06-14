@@ -58,5 +58,13 @@ DependencyProperty.Register("PasswordText", typeof(string), typeof(PasswordContr
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Password == string.Empty)
+            {
+                DisplayPasswordChk.IsChecked = false;
+            }
+        }
     }
 }

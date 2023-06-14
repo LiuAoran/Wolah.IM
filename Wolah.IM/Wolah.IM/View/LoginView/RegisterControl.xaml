@@ -7,23 +7,36 @@
              xmlns:cus="clr-namespace:Wolah.IM.CustomControl"
              mc:Ignorable="d" 
              Width="360"  Height="450">
-    <Grid Height="400" Width="300">
+    <Grid Height="450" Width="300">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="150"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="LoginTextBlock" Text="Register" FontSize="40" VerticalAlignment="Center"></TextBlock>
-        <StackPanel Grid.Row="1">
+        <TextBlock x:Name="LoginTextBlock" Text="Register" Style="{StaticResource LoginTitleTextBlock}"></TextBlock>
+        <StackPanel Grid.Row="1" VerticalAlignment="Center">
             <TextBlock Text="Name" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
-            <cus:AccountControl Height="36" Width="280" Margin="0,10,0,10"></cus:AccountControl>
+            <cus:FormTextBoxControl Height="36" Width="280" Margin="0,0,0,10" Watermark="User Name"></cus:FormTextBoxControl>
             <TextBlock Text="Password" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
-            <cus:PasswordControl Height="36" Width="280" Margin="0,10,0,10"></cus:PasswordControl >
+            <cus:PasswordControl Height="36" Width="280" Margin="0,0,0,10" Watermark="Password"></cus:PasswordControl >
             <TextBlock Text="Confirm Password" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
-            <cus:PasswordControl Height="36" Width="280" Margin="0,10,0,10"></cus:PasswordControl>
+            <cus:PasswordControl Height="36" Width="280" Margin="0,0,0,10" Watermark="Repeat password"></cus:PasswordControl>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="Email" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
+                    <cus:FormTextBoxControl Height="36" Width="200" Margin="0,0,0,10" Watermark="Email"></cus:FormTextBoxControl>
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Code" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
+                    <cus:FormTextBoxControl Height="36" Width="70" Margin="10,0,0,10"></cus:FormTextBoxControl>
+                </StackPanel>
+            </StackPanel>
+            
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <Button x:Name="GoLoginBtn" Content="Login" Height="50" Click="GoLoginBtn_OnClick" Margin="0,30,0,10"> </Button>
+            <Button Style="{StaticResource RC.PassButtonStyle}" x:Name="RegisterBtn" Content="Register" Height="40" Click="GoLoginBtn_OnClick" ></Button>
+
+            <Button Style="{StaticResource RC.JoyButtonStyle}" x:Name="GoLoginBtn" Content="Back To Login" Height="40" Click="GoLoginBtn_OnClick" Margin="0,10,0,0"> </Button>
         </StackPanel>
     </Grid>
 </UserControl>
