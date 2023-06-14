@@ -7,6 +7,13 @@
              xmlns:cus="clr-namespace:Wolah.IM.CustomControl"
              mc:Ignorable="d" 
               Width="360"  Height="450">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Resource/Style/ButtonStyle.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid x:Name="LoginGrid" Height="400" Width="300">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
@@ -21,7 +28,7 @@
             <cus:PasswordControl Height="36" Width="280"  Watermark="Password"></cus:PasswordControl>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <Button x:Name="GoRegisterBtn" Content="Register" Height="50" Click="GoRegisterBtn_OnClick"> </Button>
+            <Button Style="{StaticResource RC.SuccessButtonStyle}" x:Name="GoRegisterBtn" Content="Register" Height="50" Click="GoRegisterBtn_OnClick"> </Button>
         </StackPanel>
     </Grid>
 </UserControl>
