@@ -21,7 +21,7 @@ namespace Wolah.IM.Converter
             }
             else
             {
-                return Visibility.Collapsed;
+                return Visibility.Hidden;
             }
         }
 

@@ -21,7 +21,7 @@ namespace Wolah.IM.CustomControl
     /// <summary>
     /// Interaction logic for PasswordControl.xaml
     /// </summary>
-    public partial class PasswordControl : UserControl
+    public partial class PasswordControl : UserControl,INotifyPropertyChanged
     {
         public static readonly DependencyProperty WatermarkProperty =
     DependencyProperty.Register("Watermark", typeof(string), typeof(PasswordControl), new PropertyMetadata(null));
@@ -31,7 +31,11 @@ namespace Wolah.IM.CustomControl
             set { SetValue(WatermarkProperty, value); }
         }
 
-        private string? _password;
+        public static readonly DependencyProperty PasswordTextProperty =
+DependencyProperty.Register("PasswordText", typeof(string), typeof(PasswordControl), new PropertyMetadata(string.Empty));
+        public string? PasswordText => Password;
+
+        private string? _password = string.Empty;
         public string? Password
         {
             get => _password;
@@ -41,17 +45,23 @@ namespace Wolah.IM.CustomControl
             }
         }
 
+
+        public PasswordControl()
+        {
+            InitializeComponent();
+            DataContext = this;
+        }
+
+        
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public PasswordControl()
+        private void UserControl_LostFocus(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+            DisplayPasswordChk.IsChecked = false;
         }
-
-
     }
 }
