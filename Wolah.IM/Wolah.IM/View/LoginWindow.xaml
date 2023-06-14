@@ -75,13 +75,13 @@
                 </Grid.RowDefinitions>
                 <Grid Grid.Row="0" x:Name="TitleBarGrid" Height="30">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Name="ServerSettingsBtn" Style="{StaticResource TitleBarButtonStyle}" Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                            <Path Width="32" Height="32" 
-                                   Data="M 13,11 22,20 M 13,20 22,11" 
+                        <Button Name="ServerSettingsBtn" Style="{StaticResource TitleBarButtonStyle}">
+                            <Path Width="20" Height="20" 
+                                   Data="M13.845 15H6.50369C6.50246 15 6.50123 15 6.5 15C4.567 15 3 13.433 3 11.5C3 9.567 4.567 8 6.5 8L6.51569 8.00003C6.69251 6.03774 8.34167 4.5 10.35 4.5C12.4763 4.5 14.2 6.2237 14.2 8.35C14.2 8.47391 14.1941 8.59646 14.1827 8.71737C15.766 8.88361 16.9999 10.2227 16.9999 11.85C16.9999 13.5767 15.6106 14.9789 13.8889 14.9998V15H13.8549C13.8532 15 13.8516 15 13.8499 15C13.8483 15 13.8466 15 13.845 15Z"
                           Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
                           StrokeThickness="1" />
                         </Button>
-                        <CheckBox Style="{StaticResource ThemeModeBoxStyle}" Height="32"></CheckBox>
+                        <CheckBox Style="{StaticResource ThemeModeBoxStyle}" Height="32" Width="42"></CheckBox>
                         <Rectangle Width="1" Fill="#2A000000" Margin="0,4,0,4"></Rectangle>
                         <Button Name="CloseWindowBtn" Style="{StaticResource TitleBarButtonStyle}" Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                             <Path Width="36" Height="32" 
