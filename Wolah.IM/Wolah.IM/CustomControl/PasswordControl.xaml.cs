@@ -1,6 +1,9 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,17 +31,27 @@ namespace Wolah.IM.CustomControl
             set { SetValue(WatermarkProperty, value); }
         }
 
-        public static readonly DependencyProperty PasswordProperty =
-DependencyProperty.Register("Password", typeof(string), typeof(PasswordControl), new PropertyMetadata(null));
-        public string Password
+        private string? _password;
+        public string? Password
         {
-            get { return (string)GetValue(PasswordProperty); }
-            set { SetValue(PasswordProperty, value); }
+            get => _password;
+            set {
+                _password = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public PasswordControl()
         {
             InitializeComponent();
         }
+
+
     }
 }
