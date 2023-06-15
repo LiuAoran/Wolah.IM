@@ -31,14 +31,40 @@ namespace Wolah.IM.CustomControl
             set { SetValue(WatermarkProperty, value); }
         }
 
-        public static readonly DependencyProperty PasswordTextProperty =
-DependencyProperty.Register("PasswordText", typeof(string), typeof(PasswordControl), new PropertyMetadata(string.Empty));
+        #region - 用于绑定ViewModel部分 -
 
-        public string? PasswordText
+        public ICommand Command
         {
-            get { return (string)GetValue(PasswordTextProperty); }
-            set { SetValue(PasswordTextProperty, value); }
-        } 
+            get { return (ICommand)GetValue(CommandProperty); }
+            set { SetValue(CommandProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommandProperty =
+            DependencyProperty.Register("Command", typeof(ICommand), typeof(PasswordControl), new PropertyMetadata(default(ICommand)));
+
+        public object CommandParameter
+        {
+            get { return (object)GetValue(CommandParameterProperty); }
+            set { SetValue(CommandParameterProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CommandParameterProperty =
+            DependencyProperty.Register("CommandParameter", typeof(object), typeof(PasswordControl), new PropertyMetadata(default(object)));
+
+        public IInputElement CommandTarget { get; set; }
+
+        #endregion
+
+        public static readonly RoutedEvent PasswordChangedEvent =
+        EventManager.RegisterRoutedEvent("PasswordChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(PasswordControl));
+
+        public event RoutedEventHandler PasswordChanged
+        {
+            add => AddHandler(PasswordChangedEvent, value);
+            remove => RemoveHandler(PasswordChangedEvent, value);
+        }
 
         private string? _password = string.Empty;
         public string? Password
@@ -47,15 +73,20 @@ DependencyProperty.Register("PasswordText", typeof(string), typeof(PasswordContr
             set {
                 _password = value;
                 OnPropertyChanged();
-                PasswordText = value;
+
+                if(this.Command != null)
+                {
+                    this.Command.Execute(CommandParameter);
+                    RoutedEventArgs args = new RoutedEventArgs(PasswordControl.PasswordChangedEvent, this);
+                    RaiseEvent(args);
+                } 
             }
         }
-
 
         public PasswordControl()
         {
             InitializeComponent();
-            DataContext = this;
+            Grid.DataContext = this;
         }
 
         

@@ -30,5 +30,10 @@ namespace Wolah.IM.View.LoginView
         {
             GoRegisterEvent?.Invoke(this, EventArgs.Empty);
         }
+
+        private void PasswordControl_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

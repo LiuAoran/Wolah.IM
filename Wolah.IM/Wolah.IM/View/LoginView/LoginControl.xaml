@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:Wolah.IM.View.LoginView"
              xmlns:cus="clr-namespace:Wolah.IM.CustomControl"
              xmlns:vm="clr-namespace:Wolah.IM.ViewModel.LoginViewModel"
              mc:Ignorable="d" 
               Width="360"  Height="450">
     <UserControl.DataContext>
-        <vm:LoginControlViewModel />
+        <vm:LoginControlViewModel/>
     </UserControl.DataContext>
     <Grid Height="450" Width="300">
         <Grid.RowDefinitions>
@@ -22,7 +23,8 @@
             <TextBlock Text="Name" FontWeight="Bold" Margin="18,0,0,0" Foreground="#5A5A5A"></TextBlock>
             <cus:AccountControl Height="36" Width="280" Margin="0,0,0,10" Text="{Binding UserName,Mode=OneWayToSource}" Watermark="Account"></cus:AccountControl>
             <TextBlock Text="Password" FontWeight="Bold" Margin="18,0,0,0"  Foreground="#5A5A5A"></TextBlock>
-            <cus:PasswordControl Height="36" Width="280"  Watermark="Password" PasswordText="{Binding UserPassword, Mode=OneWayToSource}"></cus:PasswordControl>
+            <cus:PasswordControl x:Name="PasswordControl"  Height="36" Width="280"  Watermark="Password" Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=PasswordControl, Path=Password}">
+            </cus:PasswordControl>
         </StackPanel>
         <StackPanel Grid.Row="2">
             <Button Style="{StaticResource RC.PassButtonStyle}" x:Name="LoginBtn" Content="Login" Height="40" Command="{Binding LoginCommand}"> </Button>

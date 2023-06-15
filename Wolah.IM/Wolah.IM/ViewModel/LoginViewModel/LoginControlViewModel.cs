@@ -12,31 +12,38 @@ namespace Wolah.IM.ViewModel.LoginViewModel;
 public class LoginControlViewModel
 {
     private TCPClient tcpClient;
-    private string _userName;
+    private string _userName = string.Empty;
     public string UserName
     {
         get => _userName;
         set => _userName = value;
     }
-    private string _userPassword;
+    private string _userPassword = string.Empty;
     public string UserPassword
     {
         get => _userPassword;
         set => _userPassword = value;
     }
     
-    public ICommand LoginCommand { get; }
+    public ICommand LoginCommand { get; } 
+    public ICommand PasswordChangedCommand { get; }
 
     public LoginControlViewModel()
     {
         tcpClient = new TCPClient();
         LoginCommand = new RelayCommand(Login);
+        PasswordChangedCommand = new RelayCommand(PasswordChanged);
         ServerSettingControlViewModel.UpdateServerEvent += UpdateServer;
     }
-    
+
+    private void PasswordChanged()
+    {
+        
+    }
+
     private async void Login()
     {
-        if(UserPassword == null || UserName == null)
+        if(UserPassword == string.Empty || UserName == string.Empty)
         {
             MessageBox.Show("用户名或密码不能为空");
             return;
