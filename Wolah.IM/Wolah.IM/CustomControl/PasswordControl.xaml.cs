@@ -33,7 +33,12 @@ namespace Wolah.IM.CustomControl
 
         public static readonly DependencyProperty PasswordTextProperty =
 DependencyProperty.Register("PasswordText", typeof(string), typeof(PasswordControl), new PropertyMetadata(string.Empty));
-        public string? PasswordText => Password;
+
+        public string? PasswordText
+        {
+            get { return (string)GetValue(PasswordTextProperty); }
+            set { SetValue(PasswordTextProperty, value); }
+        } 
 
         private string? _password = string.Empty;
         public string? Password
@@ -42,6 +47,7 @@ DependencyProperty.Register("PasswordText", typeof(string), typeof(PasswordContr
             set {
                 _password = value;
                 OnPropertyChanged();
+                PasswordText = value;
             }
         }
 

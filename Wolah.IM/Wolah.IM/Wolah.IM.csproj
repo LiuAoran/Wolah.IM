@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Client\**" />
     <Compile Remove="Helper\Enum.cs" />
   </ItemGroup>

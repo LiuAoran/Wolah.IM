@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -55,6 +56,8 @@ public class ServerSettingControlViewModel : INotifyPropertyChanged
         }
     }
 
+    public static event EventHandler UpdateServerEvent;
+
     #region Command Declear
 
     public ICommand PingServerCommand { get;  }
@@ -106,6 +109,7 @@ public class ServerSettingControlViewModel : INotifyPropertyChanged
         ServerSource.ServerPort = port;
         ServerSource.ServerKey = ServerKey;
         ResponseText = "保存成功";
+        UpdateServerEvent?.Invoke(this, EventArgs.Empty);
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
