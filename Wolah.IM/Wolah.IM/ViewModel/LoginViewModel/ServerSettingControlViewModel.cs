@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -32,6 +33,17 @@ public class ServerSettingControlViewModel : INotifyPropertyChanged
         }
     }
     
+    private string? _serverKey;
+    public string? ServerKey
+    {
+        get => _serverKey;
+        set
+        {
+            _serverKey = value;
+            OnPropertyChanged();
+        }
+    }
+    
     private string? _responseText;
     public string? ResponseText
     {
@@ -46,12 +58,14 @@ public class ServerSettingControlViewModel : INotifyPropertyChanged
     #region Command Declear
 
     public ICommand PingServerCommand { get;  }
+    public ICommand ConfirmCommand { get;  }
 
     #endregion
     
     public ServerSettingControlViewModel()
     {
         PingServerCommand = new RelayCommand(PingServer);
+        ConfirmCommand = new RelayCommand(Confirm);
     }
     
     private async void PingServer()
@@ -74,6 +88,24 @@ public class ServerSettingControlViewModel : INotifyPropertyChanged
         {
             ResponseText = "连接失败";
         }
+    }
+    
+    public void Confirm()
+    {
+        if (string.IsNullOrEmpty(ServerIP) || string.IsNullOrEmpty(ServerPort))
+        {
+            ResponseText = "IP或端口不能为空";
+            return;
+        }
+        if (!int.TryParse(ServerPort, out var port))
+        {
+            ResponseText = "端口格式不正确";
+            return;
+        }
+        ServerSource.ServerIP = IPAddress.Parse(ServerIP);
+        ServerSource.ServerPort = port;
+        ServerSource.ServerKey = ServerKey;
+        ResponseText = "保存成功";
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
