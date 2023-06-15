@@ -12,13 +12,13 @@ namespace Wolah.IM.ViewModel.LoginViewModel;
 public class LoginControlViewModel
 {
     private TCPClient tcpClient;
-    private string _userName;
+    private string _userName = string.Empty;
     public string UserName
     {
         get => _userName;
         set => _userName = value;
     }
-    private string _userPassword;
+    private string _userPassword = string.Empty;
     public string UserPassword
     {
         get => _userPassword;
@@ -36,7 +36,7 @@ public class LoginControlViewModel
     
     private async void Login()
     {
-        if(UserPassword == null || UserName == null)
+        if(UserPassword == string.Empty || UserName == string.Empty)
         {
             MessageBox.Show("用户名或密码不能为空");
             return;
