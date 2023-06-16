@@ -32,11 +32,11 @@ public class LoginControlViewModel
     {
         tcpClient = new TCPClient();
         LoginCommand = new RelayCommand(Login);
-        PasswordChangedCommand = new RelayCommand(PasswordChanged);
+        PasswordChangedCommand = new RelayCommand<string?>(PasswordChanged);
         ServerSettingControlViewModel.UpdateServerEvent += UpdateServer;
     }
 
-    private void PasswordChanged()
+    private void PasswordChanged(string? password)
     {
         
     }
