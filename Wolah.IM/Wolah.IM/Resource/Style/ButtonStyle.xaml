@@ -15,7 +15,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border"
+                    <Border x:Name="Border"
                                 Background="Transparent"
                                 BorderThickness="0"
                                 SnapsToDevicePixels="True">
@@ -28,11 +28,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="border" Property="Background" Value="#E9E9E9" />
+                            <Setter TargetName="Border" Property="Background" Value="#E9E9E9" />
                             <Setter Property="Foreground" Value="#000000" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="border" Property="Background" Value="#EDEDED" />
+                            <Setter TargetName="Border" Property="Background" Value="#EDEDED" />
                             <Setter Property="Foreground" Value="#000000" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -46,7 +46,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border"
+                    <Border x:Name="Border"
                                 Background="Transparent"
                                 BorderThickness="0"
                                 SnapsToDevicePixels="True"
@@ -60,11 +60,11 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="border" Property="Background" Value="#C42B1C" />
+                            <Setter TargetName="Border" Property="Background" Value="#C42B1C" />
                             <Setter Property="Foreground" Value="#FFFFFF" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="border" Property="Background" Value="#C84031" />
+                            <Setter TargetName="Border" Property="Background" Value="#C84031" />
                             <Setter Property="Foreground" Value="#FFFFFF" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -85,10 +85,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border"
+                    <Border x:Name="Border"
                                 Background="#20a162"
                                 BorderThickness="0"
-                                CornerRadius="{Binding ElementName=border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
+                                CornerRadius="{Binding ElementName=Border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
                                 SnapsToDevicePixels="True"
                             Height="{TemplateBinding Height}"
                             Width="{TemplateBinding Width}">
@@ -100,10 +100,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#1d855c" />
+                            <Setter TargetName="Border" Property="Background" Value="#1d855c" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#157047" />
+                            <Setter TargetName="Border" Property="Background" Value="#157047" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -115,10 +115,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border"
+                    <Border x:Name="Border"
                         Background="#158bb8"
                         BorderThickness="0"
-                         CornerRadius="{Binding ElementName=border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
+                         CornerRadius="{Binding ElementName=Border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
                         SnapsToDevicePixels="True"
                         Height="{TemplateBinding Height}"
                         Width="{TemplateBinding Width}">
@@ -130,10 +130,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#117191" />
+                            <Setter TargetName="Border" Property="Background" Value="#117191" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#0e586f" />
+                            <Setter TargetName="Border" Property="Background" Value="#0e586f" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -146,10 +146,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border"
+                    <Border x:Name="Border"
                         Background="#f4a83a"
                         BorderThickness="0"
-                         CornerRadius="{Binding ElementName=border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
+                         CornerRadius="{Binding ElementName=Border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
                         SnapsToDevicePixels="True"
                         Height="{TemplateBinding Height}"
                         Width="{TemplateBinding Width}">
@@ -161,10 +161,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#da9227" />
+                            <Setter TargetName="Border" Property="Background" Value="#da9227" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#b97e1e" />
+                            <Setter TargetName="Border" Property="Background" Value="#b97e1e" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -176,10 +176,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border"
+                    <Border x:Name="Border"
                         Background="#ac1f18"
                         BorderThickness="0"
-                        CornerRadius="{Binding ElementName=border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
+                        CornerRadius="{Binding ElementName=Border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
                         SnapsToDevicePixels="True"
                         Height="{TemplateBinding Height}"
                         Width="{TemplateBinding Width}">
@@ -191,10 +191,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#901812" />
+                            <Setter TargetName="Border" Property="Background" Value="#901812" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#78130e" />
+                            <Setter TargetName="Border" Property="Background" Value="#78130e" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -206,10 +206,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border"
+                    <Border x:Name="Border"
                         Background="#525288"
                         BorderThickness="0"
-                        CornerRadius="{Binding ElementName=border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
+                        CornerRadius="{Binding ElementName=Border, Path=ActualHeight, Converter={StaticResource HeightToCornerRadiusConverter}}"
                         SnapsToDevicePixels="True"
                         Height="{TemplateBinding Height}"
                         Width="{TemplateBinding Width}">
@@ -221,10 +221,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#434366" />
+                            <Setter TargetName="Border" Property="Background" Value="#434366" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="#36354d" />
+                            <Setter TargetName="Border" Property="Background" Value="#36354d" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

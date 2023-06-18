@@ -26,19 +26,12 @@ public class LoginControlViewModel
     }
     
     public ICommand LoginCommand { get; } 
-    public ICommand PasswordChangedCommand { get; }
 
     public LoginControlViewModel()
     {
         tcpClient = new TCPClient();
         LoginCommand = new RelayCommand(Login);
-        PasswordChangedCommand = new RelayCommand<string?>(PasswordChanged);
         ServerSettingControlViewModel.UpdateServerEvent += UpdateServer;
-    }
-
-    private void PasswordChanged(string? password)
-    {
-        
     }
 
     private async void Login()

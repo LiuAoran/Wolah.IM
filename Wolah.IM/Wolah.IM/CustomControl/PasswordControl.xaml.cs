@@ -31,6 +31,14 @@ namespace Wolah.IM.CustomControl
             set { SetValue(WatermarkProperty, value); }
         }
 
+        public static readonly DependencyProperty PasswordProperty =
+DependencyProperty.Register("Password", typeof(string), typeof(PasswordControl), new PropertyMetadata(string.Empty));
+        public string Password
+        {
+            get { return (string)GetValue(PasswordProperty); }
+            set { SetValue(PasswordProperty, value); }
+        }
+
         #region - 用于绑定ViewModel部分 -
 
         public ICommand Command
@@ -64,23 +72,6 @@ namespace Wolah.IM.CustomControl
         {
             add => AddHandler(PasswordChangedEvent, value);
             remove => RemoveHandler(PasswordChangedEvent, value);
-        }
-
-        private string? _password = string.Empty;
-        public string? Password
-        {
-            get => _password;
-            set {
-                _password = value;
-                OnPropertyChanged();
-
-                if(this.Command != null)
-                {
-                    this.Command.Execute(CommandParameter);
-                    RoutedEventArgs args = new RoutedEventArgs(PasswordControl.PasswordChangedEvent, this);
-                    RaiseEvent(args);
-                } 
-            }
         }
 
         public PasswordControl()
