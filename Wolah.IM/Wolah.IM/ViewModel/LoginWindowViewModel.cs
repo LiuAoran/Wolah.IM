@@ -69,6 +69,7 @@ namespace Wolah.IM.ViewModel
                 msg["cmd"] = Commands.CmdLogout.ToInt();
                 //SendMsg(msg);
                 window.Close();
+                Application.Current.Shutdown();
             }
         }
         
