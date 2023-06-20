@@ -5,11 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wolah.IM.View"
         mc:Ignorable="d"
-        Title="MainWindow"
+        Title="MainWindow" 
+        SnapsToDevicePixels="True"
         WindowStartupLocation="CenterScreen" 
         ResizeMode="CanResize"
-        Height="500" Width="820">
-    <Grid>
-
+        SizeToContent="WidthAndHeight"
+        FontFamily="Microsoft YaHei" 
+        Height="680" Width="1000"
+        BorderThickness="{Binding RelativeSource={RelativeSource Mode=Self},Path=WindowState,Converter={StaticResource WindowStateToThicknessConverter}}"
+        x:Name="Window"
+        MinHeight="550" MinWidth="750">
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            CornerRadius="8"
+            NonClientFrameEdges="Left,Bottom,Right"
+            UseAeroCaptionButtons="False"
+            ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}">
+            <WindowChrome.CaptionHeight>
+                <MultiBinding Converter="{StaticResource CaptionHeightConverter}">
+                    <Binding ElementName="MainGrid" Path="ActualHeight"/>
+                    <Binding ElementName="Window" Path="BorderThickness.Top"/>
+                </MultiBinding>
+            </WindowChrome.CaptionHeight>
+        </WindowChrome>
+    </WindowChrome.WindowChrome>
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button 
+                     x:Name="MinimizeButton"
+                     Grid.Column="3"
+                    ToolTip="Minimize"
+                    Style="{StaticResource TitleBarButtonStyle}">
+                <Path Width="36" Height="32"
+                      Data="M 13,15 H 23"
+                      Stroke="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                      StrokeThickness="1" />
+            </Button>
+            <Button x:Name="MaximizeRestoreButton" 
+                    Grid.Column="4"
+                    ToolTip="Maximize"
+                    Style="{StaticResource TitleBarButtonStyle}">
+                <Path Width="36" Height="32"
+                      Data="{Binding ElementName=Window, Path=WindowState, Converter={StaticResource WindowStateToPathConverter}}"
+                      Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                      StrokeThickness="1" />
+            </Button>
+            <Button Grid.Column="5"
+                        x:Name="CloseButton"
+                    ToolTip="Close"
+                    Style="{StaticResource TitleBarCloseButtonStyle}">
+                <Path Width="36" Height="32"
+                      Data="M 13,11 22,20 M 13,20 22,11"
+                      Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
+                      StrokeThickness="1" />
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

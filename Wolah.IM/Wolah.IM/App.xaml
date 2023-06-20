@@ -12,7 +12,10 @@
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converter:BoolToVisibilityConverter>
             <converter:AntiBoolToVisibilityConverter x:Key="AntiBoolToVisibilityConverter"></converter:AntiBoolToVisibilityConverter>
             <converter:HeightToCornerRadiusConverter x:Key="HeightToCornerRadiusConverter"></converter:HeightToCornerRadiusConverter>
- 
+            <converter:CaptionHeightConverter x:Key="CaptionHeightConverter"></converter:CaptionHeightConverter>
+            <converter:WindowStateToPathConverter x:Key="WindowStateToPathConverter"></converter:WindowStateToPathConverter>
+            <converter:WindowStateToThicknessConverter x:Key="WindowStateToThicknessConverter"></converter:WindowStateToThicknessConverter>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Asset/Theme/LightThemeMode.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="Asset/Theme/DarkThemeMode.xaml"></ResourceDictionary>

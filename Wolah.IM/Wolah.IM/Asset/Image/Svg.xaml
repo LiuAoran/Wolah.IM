@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <PathGeometry x:Key="CloseWindowPath" Figures=""></PathGeometry>
+    <PathGeometry x:Key="MinimizemWindowPath" Figures=""></PathGeometry>
+    <PathGeometry x:Key="MaximizeWindowPath" Figures=""></PathGeometry>
+    <PathGeometry x:Key="ResizeWindowPath" Figures=""></PathGeometry>
+    <PathGeometry x:Key="LightModePath" Figures=""></PathGeometry>
+    <PathGeometry x:Key="DarkModePath" Figures=""></PathGeometry>
+    <PathGeometry x:Key="NetConnectionPath" Figures=""></PathGeometry>
+</ResourceDictionary>

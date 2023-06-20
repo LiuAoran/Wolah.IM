@@ -34,7 +34,7 @@
         </Setter>
     </Style>
     <Style TargetType="TextBox" x:Key="AccountTextBoxStyle" BasedOn="{StaticResource RoundCornerTextBox}"></Style>
-    <Style TargetType="TextBox" x:Key="PassowrdTextBoxStyle" BasedOn="{StaticResource RoundCornerTextBox}">
+    <Style TargetType="TextBox" x:Key="PasswordTextBoxStyle" BasedOn="{StaticResource RoundCornerTextBox}">
         <Setter Property="Padding" Value="15,0,30,0"/>
     </Style>
 </ResourceDictionary>
