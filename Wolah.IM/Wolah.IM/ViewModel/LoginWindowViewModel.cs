@@ -42,34 +42,11 @@ namespace Wolah.IM.ViewModel
         {
             CloseWindowCommand = new RelayCommand<object>(CloseWindow);
             HideWindowCommand = new RelayCommand<object>(HideWindow);
-            TCPClient.CallLoginWindowEvent += TCPClientOnCallLoginWindowEvent;
+            
 
             InitCurrentTime();
         }
-
-        private void TCPClientOnCallLoginWindowEvent(object? sender, JObject e)
-        {
-            if (e["cmd"].ToObject<int>() == Commands.CmdLogin.ToInt())
-            {
-                if (e["res"].ToObject<string>() == "yes")
-                {
-                    Application.Current.Dispatcher.BeginInvoke(new Action(delegate
-                    {
-                        var window = Application.Current.MainWindow;
-                        window?.Close();
-                        var mainWindow = new MainWindow();
-                        mainWindow.Show();
-                    }));
-                    TCPClient.CallLoginWindowEvent -= TCPClientOnCallLoginWindowEvent;
-                }
-                else
-                {
-                    var err = e["err"].ToObject<string>();
-                    MessageBox.Show(err);
-                }
-            }
-        }
-
+        
         private void InitCurrentTime()
         {
             DispatcherTimer showTimer = new DispatcherTimer();

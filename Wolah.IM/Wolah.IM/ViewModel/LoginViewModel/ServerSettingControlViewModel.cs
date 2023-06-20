@@ -105,8 +105,16 @@ public class ServerSettingControlViewModel : INotifyPropertyChanged
             ResponseText = "端口格式不正确";
             return;
         }
-        ServerSource.ServerIP = IPAddress.Parse(ServerIP);
-        ServerSource.ServerPort = port;
+        try
+        {
+            ServerSource.ServerIP = IPAddress.Parse(ServerIP);
+        }
+        catch (Exception)
+        {
+            ResponseText = "IP格式不正确";
+            return;
+        }
+        
         ServerSource.ServerKey = ServerKey;
         ResponseText = "保存成功";
         UpdateServerEvent?.Invoke(this, EventArgs.Empty);

@@ -21,7 +21,7 @@ namespace Wolah.IM.Network
         private NetworkStream stream;
 
         // The event handler for data received event
-        public static event EventHandler<JObject> CallLoginWindowEvent;
+        public static event EventHandler<JObject> LoginControlEvent;
 
         // The constructor that takes a host name and a port number
         public TCPClient(string host, int port, int delay = 3000)
@@ -142,7 +142,7 @@ namespace Wolah.IM.Network
                             Int32.TryParse(j["cmd"].ToString(), out int cmd);
                             if (cmd == Commands.CmdLogin.ToInt() || cmd == Commands.CmdRegister.ToInt())
                             {
-                                CallLoginWindowEvent?.Invoke(this, j);
+                                LoginControlEvent?.Invoke(this, j);
                             }
                         }
                         catch (ArgumentException)
