@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:Wolah.IM.ViewModel"
         xmlns:local="clr-namespace:Wolah.IM.View"
         mc:Ignorable="d"
         Title="MainWindow" 
@@ -11,7 +12,7 @@
         ResizeMode="CanResize"
         SizeToContent="WidthAndHeight"
         FontFamily="Microsoft YaHei" 
-        Height="680" Width="1000"
+        Height="750" Width="1200"
         BorderThickness="{Binding RelativeSource={RelativeSource Mode=Self},Path=WindowState,Converter={StaticResource WindowStateToThicknessConverter}}"
         x:Name="Window"
         MinHeight="550" MinWidth="750">
@@ -29,6 +30,9 @@
             </WindowChrome.CaptionHeight>
         </WindowChrome>
     </WindowChrome.WindowChrome>
+    <Window.DataContext>
+        <vm:MainWindowViewModel></vm:MainWindowViewModel>
+    </Window.DataContext>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -39,6 +43,7 @@
                      x:Name="MinimizeButton"
                      Grid.Column="3"
                     ToolTip="Minimize"
+                    Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
                     Style="{StaticResource TitleBarButtonStyle}">
                 <Path Width="36" Height="32"
                       Data="M 13,15 H 23"
@@ -48,7 +53,8 @@
             <Button x:Name="MaximizeRestoreButton" 
                     Grid.Column="4"
                     ToolTip="Maximize"
-                    Style="{StaticResource TitleBarButtonStyle}">
+                    Style="{StaticResource TitleBarButtonStyle}"
+                     Command="{Binding ResizeWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                 <Path Width="36" Height="32"
                       Data="{Binding ElementName=Window, Path=WindowState, Converter={StaticResource WindowStateToPathConverter}}"
                       Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
@@ -57,7 +63,8 @@
             <Button Grid.Column="5"
                         x:Name="CloseButton"
                     ToolTip="Close"
-                    Style="{StaticResource TitleBarCloseButtonStyle}">
+                    Style="{StaticResource TitleBarCloseButtonStyle}"
+                     Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
                 <Path Width="36" Height="32"
                       Data="M 13,11 22,20 M 13,20 22,11"
                       Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
