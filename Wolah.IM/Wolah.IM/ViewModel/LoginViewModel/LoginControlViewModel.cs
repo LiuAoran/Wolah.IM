@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
@@ -25,6 +26,12 @@ public class LoginControlViewModel
         get => _userPassword;
         set => _userPassword = value;
     }
+    private string _receiveMessage = string.Empty;
+    public string ReceiveMessage
+    {
+        get => _receiveMessage;
+        set => _receiveMessage = value;
+    }
     
     public ICommand LoginCommand { get; } 
 
@@ -33,37 +40,36 @@ public class LoginControlViewModel
         tcpClient = new TCPClient();
         LoginCommand = new RelayCommand(Login);
         ServerSettingControlViewModel.UpdateServerEvent += UpdateServer;
+        
     }
-
-    private void Login()
-    //private async void Login()
+    
+    private async void Login()
     {
-        //if(UserPassword == string.Empty || UserName == string.Empty)
-        //{
-        //    MessageBox.Show("用户名或密码不能为空");
-        //    return;
-        //}
-        //// Send a chat message to the server
-        //JObject chat = new JObject();
-        //chat["cmd"] = Commands.CmdLogin.ToInt();
-        //chat["account"] = UserName;
-        //chat["password"] = UserPassword;
+        if(UserPassword == string.Empty || UserName == string.Empty)
+        {
+            MessageBox.Show("用户名或密码不能为空");
+            return;
+        }
+        // Send a chat message to the server
+        JObject chat = new JObject();
+        chat["cmd"] = Commands.CmdLogin.ToInt();
+        chat["account"] = UserName;
+        chat["password"] = UserPassword;
 
-        //if (!tcpClient.IsConnected())
-        //{
-        //    await tcpClient.ConnectAsync(ServerSource.ServerIP, ServerSource.ServerPort);
-        //    if (!tcpClient.IsConnected())
-        //    {
-        //        MessageBox.Show("连接服务器失败");
-        //        return;
-        //    }
-        //}
-        //await tcpClient.SendDataAsync(chat);
-        var currentWindow = Application.Current.MainWindow;
-        currentWindow.Close();
-
-        var mainWindow = new MainWindow();
-        mainWindow.Show();
+        if (!tcpClient.IsConnected())
+        {
+            await tcpClient.ConnectAsync(ServerSource.ServerIP, ServerSource.ServerPort);
+            if (!tcpClient.IsConnected())
+            {
+                MessageBox.Show("连接服务器失败");
+                return;
+            }
+        }
+        await tcpClient.SendDataAsync(chat);
+        await Task.Run(async () =>
+        {
+            await tcpClient.StartReceivingAsync();
+        });
     }
     
     private void UpdateServer(object? sender, EventArgs e)
