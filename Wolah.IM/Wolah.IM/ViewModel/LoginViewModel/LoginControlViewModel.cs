@@ -72,6 +72,10 @@ public class LoginControlViewModel:INotifyPropertyChanged
     
     private async void Login()
     {
+        #if DEBUG
+        UserName = "10001";
+        UserPassword = "123";
+        #endif
         if(UserPassword == string.Empty || UserName == string.Empty)
         {
             LoginMessage = "用户名或密码不能为空";
