@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Wolah.IM.ViewModel"
         xmlns:local="clr-namespace:Wolah.IM.View"
+        xmlns:vm="clr-namespace:Wolah.IM.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" 
         SnapsToDevicePixels="True"
@@ -16,6 +17,9 @@
         BorderThickness="{Binding RelativeSource={RelativeSource Mode=Self},Path=WindowState,Converter={StaticResource WindowStateToThicknessConverter}}"
         x:Name="Window"
         MinHeight="550" MinWidth="750">
+    <Window.DataContext>
+        <vm:MainWindowViewModel />
+    </Window.DataContext>
     <WindowChrome.WindowChrome>
         <WindowChrome 
             CornerRadius="8"
@@ -58,7 +62,7 @@
                 <Path Width="36" Height="32"
                       Data="{Binding ElementName=Window, Path=WindowState, Converter={StaticResource WindowStateToPathConverter}}"
                       Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
-                      StrokeThickness="1" />
+                      StrokeThickness="1"/>
             </Button>
             <Button Grid.Column="5"
                         x:Name="CloseButton"

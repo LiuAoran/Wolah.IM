@@ -74,8 +74,14 @@ public class LoginControlViewModel:INotifyPropertyChanged
     {
         if(UserPassword == string.Empty || UserName == string.Empty)
         {
+#if DEBUG
+            UserName = "10001";
+            UserPassword = "123";
+            LoginMessage = "Test Mode";
+#else
             LoginMessage = "用户名或密码不能为空";
             return;
+#endif
         }
         // Send a chat message to the server
         JObject chat = new JObject();
