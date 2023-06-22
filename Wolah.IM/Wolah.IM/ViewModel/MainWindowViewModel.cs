@@ -12,52 +12,42 @@ using System.Windows.Input;
 using Wolah.IM.Helper;
 
 namespace Wolah.IM.ViewModel
-{ 
-namespace Wolah.IM.ViewModel;
-
-public class MainWindowViewModel
 {
-    public ICommand CloseWindowCommand { get; }
+
+    public class MainWindowViewModel
+    {
+        public ICommand CloseWindowCommand { get; }
+        public ICommand HideWindowCommand { get; }
         public ICommand ResizeWindowCommand { get; }
-    public ICommand HideWindowCommand { get; }
-    public ICommand MaximizeWindowCommand { get; }
-    public MainWindowViewModel()
-    {
-        CloseWindowCommand = new RelayCommand<object>(CloseWindow);
-            ResizeWindowCommand = new RelayCommand<object>(ResizeWindow);
-        HideWindowCommand = new RelayCommand<object>(HideWindow);
-        MaximizeWindowCommand = new RelayCommand<object>(MaximizeWindow);
-    }
-    
-    
-    #region Window Action
-    private void CloseWindow(object? obj)
-    {
-            if (obj is Window window)
+        public MainWindowViewModel()
+        {
+            CloseWindowCommand = new RelayCommand(CloseWindow);
+            HideWindowCommand = new RelayCommand(HideWindow);
+            ResizeWindowCommand = new RelayCommand(ResizeWindow);
+        }
+
+
+        #region Window Action
+        private void CloseWindow()
+        {
+                Application.Current.Shutdown();
+        }
+
+        private void HideWindow()
+        {
+            SystemCommands.MinimizeWindow(Application.Current.MainWindow);
+        }
+        private void ResizeWindow()
+        {
+            if (Application.Current.MainWindow?.WindowState == WindowState.Normal)
             {
-                window.Close();
-        Application.Current.Shutdown();
-    }
+                SystemCommands.MaximizeWindow(Application.Current.MainWindow);
+            }
+            else
+            {
+                SystemCommands.RestoreWindow(Application.Current.MainWindow);
+            }
         }
-
-        private void ResizeWindow(object? obj)
-    private void HideWindow(object? obj)
-    {
-        SystemCommands.MinimizeWindow(Application.Current.MainWindow);
+        #endregion
     }
-    private void MaximizeWindow(object? obj)
-    {
-        if (Application.Current.MainWindow?.WindowState == WindowState.Normal)
-        {
-            SystemCommands.MaximizeWindow(Application.Current.MainWindow);
-        }
-        else
-        {
-            SystemCommands.RestoreWindow(Application.Current.MainWindow);
-        }
-    }
-
-
-    #endregion
-}
 }

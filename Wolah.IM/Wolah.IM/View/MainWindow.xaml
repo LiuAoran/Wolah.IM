@@ -5,7 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Wolah.IM.ViewModel"
         xmlns:local="clr-namespace:Wolah.IM.View"
-        xmlns:vm="clr-namespace:Wolah.IM.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" 
         SnapsToDevicePixels="True"
@@ -34,9 +33,6 @@
             </WindowChrome.CaptionHeight>
         </WindowChrome>
     </WindowChrome.WindowChrome>
-    <Window.DataContext>
-        <vm:MainWindowViewModel></vm:MainWindowViewModel>
-    </Window.DataContext>
     <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -47,7 +43,7 @@
                      x:Name="MinimizeButton"
                      Grid.Column="3"
                     ToolTip="Minimize"
-                    Command="{Binding HideWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"
+                    Command="{Binding HideWindowCommand}"
                     Style="{StaticResource TitleBarButtonStyle}">
                 <Path Width="36" Height="32"
                       Data="M 13,15 H 23"
@@ -58,7 +54,7 @@
                     Grid.Column="4"
                     ToolTip="Maximize"
                     Style="{StaticResource TitleBarButtonStyle}"
-                     Command="{Binding ResizeWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                     Command="{Binding ResizeWindowCommand}">
                 <Path Width="36" Height="32"
                       Data="{Binding ElementName=Window, Path=WindowState, Converter={StaticResource WindowStateToPathConverter}}"
                       Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
@@ -68,7 +64,7 @@
                         x:Name="CloseButton"
                     ToolTip="Close"
                     Style="{StaticResource TitleBarCloseButtonStyle}"
-                     Command="{Binding CloseWindowCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                     Command="{Binding CloseWindowCommand}">
                 <Path Width="36" Height="32"
                       Data="M 13,11 22,20 M 13,20 22,11"
                       Stroke="{Binding Path=Foreground,RelativeSource={RelativeSource AncestorType={x:Type Button}}}"
